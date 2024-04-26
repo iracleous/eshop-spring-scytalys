@@ -8,11 +8,8 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String name;
+public class Product extends BaseModel {
     private double price;
     private int quantity;
+    private ProductCategory category;
 }
