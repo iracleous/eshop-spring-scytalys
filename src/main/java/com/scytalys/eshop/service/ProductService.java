@@ -4,7 +4,7 @@ import com.scytalys.eshop.model.Product;
 
 import java.util.List;
 
-public interface ApplicationService {
+public interface ProductService {
     Product createProduct(Product product);
     Product getProduct(long id);
     List<Product> getProducts();
