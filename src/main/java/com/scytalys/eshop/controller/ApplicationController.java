@@ -1,7 +1,6 @@
 package com.scytalys.eshop.controller;
 
 import com.scytalys.eshop.model.Product;
-import com.scytalys.eshop.repository.ProductRepository;
 import com.scytalys.eshop.service.ApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor(onConstructor_ = {@Autowired})
+@CrossOrigin(origins = "http://localhost:3000")
 public class ApplicationController {
 
     private final ApplicationService applicationService;

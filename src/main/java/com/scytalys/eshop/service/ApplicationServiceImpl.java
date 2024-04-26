@@ -29,15 +29,17 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Product updateProduct(long id, Product product) {
         Product productDb = productRepository.findById(id).orElse(null);
+        if (productDb == null) { return null;}
         productDb.setName(product.getName());
         productDb.setPrice(product.getPrice());
         productRepository.save(productDb);
-        return null;
+        return productDb;
     }
 
     @Override
     public boolean deleteProduct(long id) {
         Product productDb = productRepository.findById(id).orElse(null);
+        if (productDb == null) { return false;}
         productRepository.delete(productDb);
         return true;
     }
