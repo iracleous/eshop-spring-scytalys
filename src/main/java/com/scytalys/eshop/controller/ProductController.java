@@ -1,6 +1,6 @@
 package com.scytalys.eshop.controller;
 
-import com.scytalys.eshop.dto.Increase;
+import com.scytalys.eshop.dto.IncreaseDto;
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -44,7 +44,7 @@ public class ProductController {
 
 
     @PutMapping("/product/increase")
-    public boolean increase(@RequestBody Increase increase){
-        return productService.increasePrices(increase.getValue());
+    public boolean increase(@RequestBody IncreaseDto increaseDto){
+        return productService.increasePrices(increaseDto.getValue());
     }
 }

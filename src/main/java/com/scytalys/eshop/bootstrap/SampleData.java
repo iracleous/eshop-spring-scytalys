@@ -1,5 +1,6 @@
 package com.scytalys.eshop.bootstrap;
 
+import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.model.*;
 import com.scytalys.eshop.service.CartService;
 import com.scytalys.eshop.service.ProductService;
@@ -45,7 +46,7 @@ public class SampleData {
 
         Cart cart = cartService.createCart(customer.getId());
         int quantity = 2;
-        cartService.addProduct(product2.getId(), cart.getId(), quantity);
+        cartService.addProduct(new CartProductDto(cart.getId(),product2.getId(), product2.getPrice(), quantity));
 
         Cart cart2 = cartService.getCartById(1L);
         log.info("Cart 1: {}", cart2.getCustomer().getEmail());

@@ -1,11 +1,12 @@
 package com.scytalys.eshop.service;
 
+import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.CartRepository;
-import com.scytalys.eshop.repository.CartproductRepository;
+import com.scytalys.eshop.repository.CartProductRepository;
 import com.scytalys.eshop.repository.CustomerRepository;
 import com.scytalys.eshop.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
-    private final CartproductRepository cartproductRepository;
+    private final CartProductRepository cartproductRepository;
 
     @Override
     public Customer getCustomer(long id) {
@@ -72,13 +73,14 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public CartProduct addProduct(long productId, long cartId, int quantity) {
-        Cart cart = getCartById(cartId);
-        Product product = productRepository.findById(productId).orElse(null);
+    public CartProduct addProduct(CartProductDto cartProductDto) {
+        Cart cart = getCartById(cartProductDto.cartId());
+        Product product = productRepository.findById(cartProductDto.productId()).orElse(null);
         CartProduct cartproduct = new CartProduct();
         cartproduct.setProduct(product);
         cartproduct.setCart(cart);
-        cartproduct.setQuantity(quantity);
+        cartproduct.setQuantity(cartProductDto.quantity());
+        cartproduct.setPrice(cartProductDto.price());
         cartproductRepository.save(cartproduct);
         return null;
     }
@@ -96,5 +98,10 @@ public class CartServiceImpl implements CartService {
     @Override
     public boolean deleteCart(long cartId) {
         return false;
+    }
+
+    @Override
+    public double getTotalPrice(long cartId) {
+        return cartRepository.calculateTotal(cartId);
     }
 }

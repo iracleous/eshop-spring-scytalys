@@ -1,5 +1,6 @@
 package com.scytalys.eshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Customer  extends BaseModel{
     private int age;
     private LocalDate birthday;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Cart> carts = new ArrayList<>();
 }

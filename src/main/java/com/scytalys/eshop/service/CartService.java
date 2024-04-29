@@ -1,5 +1,6 @@
 package com.scytalys.eshop.service;
 
+import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
@@ -19,9 +20,10 @@ public interface CartService {
     Cart createCart(long customerId);
     Cart getCartById(long cartId);
     List<Cart> getCarts(long customerId);
-    CartProduct addProduct(long productId, long cartId, int quantity);
+    CartProduct addProduct(CartProductDto cartProductDto);
     Cart clearCart(long cartId);
     boolean removeProduct(long productId, long cartId);
     boolean deleteCart(long cartId);
+    double getTotalPrice(long cartId);
     
 }
