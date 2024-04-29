@@ -24,20 +24,17 @@ Exercise
 4. change the price of the products to BigDecimal
 5. create an endpoint in the controller that calculates the total cost of the products
 
+-----------------------------------------------------------
+JPQL
+validation
 
-
-
-
+------------------------
 
 ------
 relationships between models
-JPQL
-
-
-------
-validation
-security -> authentication, authorization
-data transfer objects
+------------------------
+dto data transfer objects
 mapper
-
+------
+security -> authentication, authorization
 
