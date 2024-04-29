@@ -4,52 +4,51 @@ import com.scytalys.eshop.model.*;
 import com.scytalys.eshop.service.CartService;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Configuration
+@Slf4j
 public class SampleData {
     private final ProductService productService;
     private final CartService cartService;
 
     @Bean
     public CommandLineRunner myCommandLineRunner() {
-        return args -> {
-            Product product = new Product();
-            product.setName("cloth");
-            product.setPrice(15.0);
-            product.setQuantity(5);
-            product.setCategory(ProductCategory.CLOTHING);
-            productService.createProduct(product)  ;
-
-
-            Product product2 = new Product();
-            product2.setName("shirt");
-            product2.setPrice(25.0);
-            product2.setQuantity(15);
-            product2.setCategory(ProductCategory.CLOTHING);
-            productService.createProduct(product2)  ;
-
-            Customer customer = new Customer();
-            customer.setEmail("dim@mail.fr");
-
-            Cart cart = new Cart();
-            cart.setCustomer(customer);
-            cart.setOrderDate(LocalDateTime.now());
-
-            Cartproduct cartproduct = new Cartproduct();
-            cartproduct.setProduct(product);
-            cartproduct.setCart(cart);
-            cartproduct.setQuantity(2);
-
-
-
-        };
+        return this::run;
     }
 
+    private void run(String... args) {
+        Product product = new Product();
+        product.setName("cloth");
+        product.setPrice(new BigDecimal("15.0"));
+        product.setQuantity(5);
+        product.setCategory(ProductCategory.CLOTHING);
+        productService.createProduct(product);
+
+        Product product2 = new Product();
+        product2.setName("shirt");
+        product2.setPrice(new BigDecimal("25.0"));
+        product2.setQuantity(15);
+        product2.setCategory(ProductCategory.CLOTHING);
+        productService.createProduct(product2);
+
+        Customer customer = new Customer();
+        customer.setEmail("dim@mail.fr");
+        cartService.createCustomer(customer);
+
+
+        Cart cart = cartService.createCart(customer.getId());
+        int quantity = 2;
+        cartService.addProduct(product2.getId(), cart.getId(), quantity);
+
+        Cart cart2 = cartService.getCartById(1L);
+        log.info("Cart 1: {}", cart2.getCustomer().getEmail());
+
+    }
 }

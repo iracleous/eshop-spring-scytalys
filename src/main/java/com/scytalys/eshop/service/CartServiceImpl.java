@@ -1,21 +1,35 @@
 package com.scytalys.eshop.service;
 
 import com.scytalys.eshop.model.Cart;
-import com.scytalys.eshop.model.Cartproduct;
+import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
+import com.scytalys.eshop.model.Product;
+import com.scytalys.eshop.repository.CartRepository;
+import com.scytalys.eshop.repository.CartproductRepository;
+import com.scytalys.eshop.repository.CustomerRepository;
+import com.scytalys.eshop.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class CartServiceImpl implements CartService {
-    @Override
-    public Customer createCart(Customer customer) {
-        return null;
-    }
+    private final CartRepository cartRepository;
+    private final CustomerRepository customerRepository;
+    private final ProductRepository productRepository;
+    private final CartproductRepository cartproductRepository;
 
     @Override
     public Customer getCustomer(long id) {
-        return null;
+        return customerRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean deleteCustomer(long id) {
+        return false;
     }
 
     @Override
@@ -29,18 +43,26 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean deleteCustomer(long id) {
-        return false;
+    public Customer createCustomer(Customer customer) {
+        return customerRepository.save(customer);
     }
 
+    ////////////////////////////////////////////////////////////////
+
     @Override
+    @Transactional
     public Cart createCart(long customerId) {
-        return null;
+        Customer customer = getCustomer(customerId);
+        Cart cart = new Cart();
+        cart.setCustomer(customer);
+        cart.setOrderDate(LocalDateTime.now());
+        cartRepository.save(cart);
+        return cart;
     }
 
     @Override
     public Cart getCartById(long cartId) {
-        return null;
+        return cartRepository.findById(cartId).orElse(null);
     }
 
     @Override
@@ -49,7 +71,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cartproduct addProduct(long productId, long cartId) {
+    @Transactional
+    public CartProduct addProduct(long productId, long cartId, int quantity) {
+        Cart cart = getCartById(cartId);
+        Product product = productRepository.findById(productId).orElse(null);
+        CartProduct cartproduct = new CartProduct();
+        cartproduct.setProduct(product);
+        cartproduct.setCart(cart);
+        cartproduct.setQuantity(quantity);
+        cartproductRepository.save(cartproduct);
         return null;
     }
 

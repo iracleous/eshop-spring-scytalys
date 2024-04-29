@@ -3,11 +3,13 @@ package com.scytalys.eshop.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity@Data
 public class Customer  extends BaseModel{
     private String address;

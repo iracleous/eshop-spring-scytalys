@@ -10,4 +10,7 @@ public interface ProductService {
     List<Product> getProducts();
     Product updateProduct(long id, Product product);
     boolean deleteProduct(long id);
+
+    boolean increasePrices(double increasePercentage);
+    List<Product> getProductsByQuantity(int quantity);
  }

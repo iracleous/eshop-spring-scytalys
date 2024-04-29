@@ -43,4 +43,16 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(productDb);
         return true;
     }
+
+    @Override
+    public boolean increasePrices(double increasePercentage) {
+        if (increasePercentage <= 0 ||increasePercentage>.40) { return false; }
+        productRepository.increasePrice(1+increasePercentage);
+        return true;
+    }
+
+    @Override
+    public List<Product> getProductsByQuantity(int quantity) {
+        return productRepository.getByQuantity(quantity);
+    }
 }

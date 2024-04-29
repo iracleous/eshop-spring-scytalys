@@ -1,15 +1,16 @@
 package com.scytalys.eshop.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 public class Product extends BaseModel {
-    private double price;
+    private BigDecimal price;
     private int quantity;
     private ProductCategory category;
 }
