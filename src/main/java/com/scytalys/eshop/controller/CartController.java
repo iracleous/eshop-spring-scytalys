@@ -2,6 +2,7 @@ package com.scytalys.eshop.controller;
 
 import com.scytalys.eshop.dto.CartDto;
 import com.scytalys.eshop.dto.CartProductDto;
+import com.scytalys.eshop.dto.CustomerInfoResponse;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.service.CartService;
@@ -35,7 +36,7 @@ public class CartController {
     }
 
     @GetMapping("/customer/{customerId}/count")
-    public long getCartCount(@PathVariable("customerId") long customerId) {
+    public CustomerInfoResponse getCartCount(@PathVariable("customerId") long customerId) {
         return cartService.getCartCount(customerId);
     }
 }

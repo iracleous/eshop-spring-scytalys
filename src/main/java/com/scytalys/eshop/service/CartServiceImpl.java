@@ -1,6 +1,7 @@
 package com.scytalys.eshop.service;
 
 import com.scytalys.eshop.dto.CartProductDto;
+import com.scytalys.eshop.dto.CustomerInfoResponse;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
@@ -106,7 +107,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public long getCartCount(long customerId) {
-        return cartRepository.getCartCount(customerId);
+    public CustomerInfoResponse getCartCount(long customerId) {
+        return  cartRepository.getCustomerCartCount(customerId);
+
     }
 }

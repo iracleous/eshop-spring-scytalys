@@ -1,6 +1,7 @@
 package com.scytalys.eshop.service;
 
 import com.scytalys.eshop.dto.CartProductDto;
+import com.scytalys.eshop.dto.CustomerInfoResponse;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
@@ -25,6 +26,6 @@ public interface CartService {
     boolean removeProduct(long productId, long cartId);
     boolean deleteCart(long cartId);
     double getTotalPrice(long cartId);
-    long getCartCount(long customerId);
-    
+    CustomerInfoResponse getCartCount(long customerId);
+
 }
