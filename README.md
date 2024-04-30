@@ -7,6 +7,13 @@ swagger
 http://localhost:5001/swagger-ui/index.html
 
 ------
+Maven Execution
+```console
+mvn exec:java
+```
+------
+
+------
 model, repository, service, controller
 
 ------ 
