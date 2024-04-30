@@ -6,9 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("select new java.lang.Double( sum(cp.quantity*coalesce(cp.price,0)*1.) ) sd  from CartProduct cp where cp.cart.id = :cartId")
     Double calculateTotal(long cartId);
+
+    @Query("select new java.lang.Long( count(c) ) from Cart c where c.customer.id = :customerId" )
+     Long getCartCount(long customerId);
 }

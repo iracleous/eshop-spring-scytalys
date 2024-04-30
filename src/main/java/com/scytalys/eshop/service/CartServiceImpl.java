@@ -104,4 +104,9 @@ public class CartServiceImpl implements CartService {
     public double getTotalPrice(long cartId) {
         return cartRepository.calculateTotal(cartId);
     }
+
+    @Override
+    public long getCartCount(long customerId) {
+        return cartRepository.getCartCount(customerId);
+    }
 }

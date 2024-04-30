@@ -16,17 +16,17 @@ import java.util.List;
 public class CartController {
     private final CartService cartService;
 
-@PostMapping
-    public Cart addCart(@RequestBody CartDto cartDto) {
-        return cartService.createCart(cartDto.customerId());
-}
-@GetMapping("/{cartId}")
-    public Cart getCart(@PathVariable("cartId")  long cartId ) {
-    return cartService.getCartById(cartId);
-}
+    @PostMapping
+        public Cart addCart(@RequestBody CartDto cartDto) {
+            return cartService.createCart(cartDto.customerId());
+    }
+    @GetMapping("/{cartId}")
+        public Cart getCart(@PathVariable("cartId")  long cartId ) {
+        return cartService.getCartById(cartId);
+    }
 
-@PostMapping("/product")
-    public CartProduct addProductToCart(@RequestBody CartProductDto cartProductDto) {
+    @PostMapping("/product")
+        public CartProduct addProductToCart(@RequestBody CartProductDto cartProductDto) {
         return cartService.addProduct(cartProductDto);
     }
     @GetMapping("/{cartId}/cost")
@@ -34,4 +34,8 @@ public class CartController {
         return cartService.getTotalPrice(cartId);
     }
 
+    @GetMapping("/customer/{customerId}/count")
+    public long getCartCount(@PathVariable("customerId") long customerId) {
+        return cartService.getCartCount(customerId);
+    }
 }

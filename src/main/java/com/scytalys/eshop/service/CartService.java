@@ -25,5 +25,6 @@ public interface CartService {
     boolean removeProduct(long productId, long cartId);
     boolean deleteCart(long cartId);
     double getTotalPrice(long cartId);
+    long getCartCount(long customerId);
     
 }
