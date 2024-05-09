@@ -1,6 +1,8 @@
 package com.scytalys.eshop.service;
 
 import com.scytalys.eshop.dto.EmployeeDto;
+import com.scytalys.eshop.exception.EmployeeCannotCreateException;
+
 import java.util.List;
 
 public interface EmployeeService {
@@ -25,8 +27,9 @@ public interface EmployeeService {
      *
      * @param employee The employee to save.
      * @return The saved employee.
+     * @throws EmployeeCannotCreateException when the Employee was not created
      */
-    EmployeeDto saveEmployee(EmployeeDto employee);
+    EmployeeDto saveEmployee(EmployeeDto employee) throws EmployeeCannotCreateException;
 
     /**
      * Delete an employee by ID.

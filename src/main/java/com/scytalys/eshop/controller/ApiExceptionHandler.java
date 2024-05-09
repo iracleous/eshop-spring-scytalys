@@ -1,6 +1,7 @@
 package com.scytalys.eshop.controller;
 
 import com.scytalys.eshop.dto.ApplicationErrorResponse;
+import com.scytalys.eshop.exception.EmployeeCannotCreateException;
 import com.scytalys.eshop.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,4 +18,12 @@ public class ApiExceptionHandler {
                 ApplicationErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
+
+    @ExceptionHandler(EmployeeCannotCreateException.class)
+    public ResponseEntity<ErrorResponse> handleEmployeeCannotCreateException(EmployeeCannotCreateException ex) {
+        ErrorResponse errorResponse = new
+                ApplicationErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
 }

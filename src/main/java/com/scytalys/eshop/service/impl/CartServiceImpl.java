@@ -1,4 +1,4 @@
-package com.scytalys.eshop.service;
+package com.scytalys.eshop.service.impl;
 
 import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.dto.CustomerInfoResponse;
@@ -10,6 +10,7 @@ import com.scytalys.eshop.repository.CartRepository;
 import com.scytalys.eshop.repository.CartProductRepository;
 import com.scytalys.eshop.repository.CustomerRepository;
 import com.scytalys.eshop.repository.ProductRepository;
+import com.scytalys.eshop.service.CartService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,8 @@
-package com.scytalys.eshop.service;
+package com.scytalys.eshop.service.impl;
 
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.ProductRepository;
+import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

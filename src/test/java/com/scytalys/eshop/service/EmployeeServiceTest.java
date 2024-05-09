@@ -4,6 +4,7 @@ import com.scytalys.eshop.dto.EmployeeDto;
 import com.scytalys.eshop.mapper.EshopMapper;
 import com.scytalys.eshop.model.Employee;
 import com.scytalys.eshop.repository.EmployeeRepository;
+import com.scytalys.eshop.service.impl.EmployeeServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

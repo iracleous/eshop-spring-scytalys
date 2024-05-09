@@ -1,9 +1,11 @@
-package com.scytalys.eshop.service;
+package com.scytalys.eshop.service.impl;
 
 import com.scytalys.eshop.dto.EmployeeDto;
+import com.scytalys.eshop.exception.EmployeeCannotCreateException;
 import com.scytalys.eshop.mapper.EshopMapper;
 import com.scytalys.eshop.model.Employee;
 import com.scytalys.eshop.repository.EmployeeRepository;
+import com.scytalys.eshop.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -56,11 +58,19 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return the saved employee
      */
     @Override
-    public EmployeeDto saveEmployee(EmployeeDto employee) {
+    public EmployeeDto saveEmployee(EmployeeDto employee)
+    throws EmployeeCannotCreateException
+    {
+        employee.setId(0);
+         try{
         return eshopMapper
                 .toEmployeeDto(
                         employeeRepository
                             .save(eshopMapper.toEmployee(employee))) ;
+         } catch (Exception e) {
+             throw new EmployeeCannotCreateException(e.getMessage());
+         }
+
     }
 
     /**

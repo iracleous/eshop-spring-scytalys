@@ -2,6 +2,7 @@ package com.scytalys.eshop.bootstrap;
 
 import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.dto.EmployeeDto;
+import com.scytalys.eshop.exception.EmployeeCannotCreateException;
 import com.scytalys.eshop.model.*;
 import com.scytalys.eshop.service.CartService;
 import com.scytalys.eshop.service.EmployeeService;
@@ -57,7 +58,11 @@ public class SampleData {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setFirstName("Dimitris");
         employeeDto.setLastName("Dimitriu");
-        employeeDto = employeeService.saveEmployee(employeeDto);
+        try {
+            employeeDto = employeeService.saveEmployee(employeeDto);
+        } catch (EmployeeCannotCreateException e) {
+            throw new RuntimeException(e);
+        }
         log.info("employeeDto 1: {}", employeeDto.getId());
 
     }
