@@ -8,19 +8,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerValidatorImpl implements CustomerValidator {
     /**
-     * @param customer
-     * @return
+     * @param customer customer details
+     * @return ResponseApi<Customer> embeds validation errors
      */
     @Override
     public ResponseApi<Customer> validate(Customer customer) {
 
         if (customer == null){
-            return new ResponseApi<Customer>(101,"null customer provided", null);
+            return new ResponseApi<>(101,"null customer provided", null);
         }
         if (customer.getZip()!=null && ! customer.getZip().matches( "\\d{5}"))
         {
-            return new ResponseApi<Customer>(103,"incorrect format for  customer zip provided", null);
+            return new ResponseApi<>(103,"incorrect format for  customer zip provided", null);
         }
-         return new ResponseApi<Customer>(0,"validation passed", new Customer());
+         return new ResponseApi<>(0,"validation passed", customer);
     }
 }

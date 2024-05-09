@@ -23,5 +23,4 @@ public class CustomerController {
     public List<Customer> getCustomers() {
         return cartService.getCustomers();
     }
-
 }

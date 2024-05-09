@@ -54,7 +54,7 @@ class EmployeeServiceTest {
         EmployeeDto result = employeeService.getEmployee(employeeId);
         assertNotNull(result);
         assertEquals(employeeId, result.getId());
-        assertEquals(FIRSTNAME, result.getFirstName());
-        assertEquals(LASTNAME, result.getLastName());
+        assertEquals(FIRSTNAME, result.getOfficialName());
+        assertEquals(LASTNAME, result.getFamilyName());
     }
 }

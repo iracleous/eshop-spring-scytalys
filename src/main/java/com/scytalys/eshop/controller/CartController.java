@@ -9,8 +9,6 @@ import com.scytalys.eshop.service.CartService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/cart")
 @AllArgsConstructor
@@ -21,6 +19,7 @@ public class CartController {
         public Cart addCart(@RequestBody CartDto cartDto) {
             return cartService.createCart(cartDto.customerId());
     }
+
     @GetMapping("/{cartId}")
         public Cart getCart(@PathVariable("cartId")  long cartId ) {
         return cartService.getCartById(cartId);
@@ -30,6 +29,7 @@ public class CartController {
         public CartProduct addProductToCart(@RequestBody CartProductDto cartProductDto) {
         return cartService.addProduct(cartProductDto);
     }
+
     @GetMapping("/{cartId}/cost")
     public double getCartCost(@PathVariable("cartId")  long cartId ) {
         return cartService.getTotalPrice(cartId);

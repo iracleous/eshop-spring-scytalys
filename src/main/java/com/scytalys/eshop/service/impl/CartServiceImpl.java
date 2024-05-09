@@ -53,7 +53,7 @@ public class CartServiceImpl implements CartService {
         ResponseApi<Customer> validation = customerValidator.validate(customer);
         if (validation.getCode() != 0) return validation;
         customerRepository.save(customer);
-        return new ResponseApi<Customer>(0,"the customer was saved", customer);
+        return new ResponseApi<>(0,"the customer was saved", customer);
     }
 
     ////////////////////////////////////////////////////////////////
