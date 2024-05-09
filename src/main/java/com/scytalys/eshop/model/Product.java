@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 public class Product extends BaseModel {
+    private String name;
     private BigDecimal price;
     private int quantity;
     private ProductCategory category;

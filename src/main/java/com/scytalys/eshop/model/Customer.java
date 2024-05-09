@@ -13,6 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity@Data
 public class Customer  extends BaseModel{
+    private String name;
     private String address;
     private String phone;
     private String email;

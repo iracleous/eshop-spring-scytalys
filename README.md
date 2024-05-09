@@ -45,3 +45,6 @@ mapper
 ------
 security -> authentication, authorization
 
+
+what should I test in a Java Spring Boot application
+

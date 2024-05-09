@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor(onConstructor_ = {@Autowired})
 @CrossOrigin(origins = "http://localhost:3000")
+
 public class ProductController {
 
     private final ProductService productService;

@@ -1,8 +1,10 @@
 package com.scytalys.eshop.bootstrap;
 
 import com.scytalys.eshop.dto.CartProductDto;
+import com.scytalys.eshop.dto.EmployeeDto;
 import com.scytalys.eshop.model.*;
 import com.scytalys.eshop.service.CartService;
+import com.scytalys.eshop.service.EmployeeService;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,7 @@ import java.math.BigDecimal;
 public class SampleData {
     private final ProductService productService;
     private final CartService cartService;
+    private final EmployeeService employeeService;
 
     @Bean
     public CommandLineRunner myCommandLineRunner() {
@@ -50,6 +53,12 @@ public class SampleData {
 
         Cart cart2 = cartService.getCartById(1L);
         log.info("Cart 1: {}", cart2.getCustomer().getEmail());
+
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setFirstName("Dimitris");
+        employeeDto.setLastName("Dimitriu");
+        employeeDto = employeeService.saveEmployee(employeeDto);
+        log.info("employeeDto 1: {}", employeeDto.getId());
 
     }
 }
