@@ -56,8 +56,8 @@ public class SampleData {
         log.info("Cart 1: {}", cart2.getCustomer().getEmail());
 
         EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Dimitris");
-        employeeDto.setLastName("Dimitriu");
+        employeeDto.setOfficialName("Dimitris");
+        employeeDto.setFamilyName("Dimitriu");
         try {
             employeeDto = employeeService.saveEmployee(employeeDto);
         } catch (EmployeeCannotCreateException e) {

@@ -2,6 +2,7 @@ package com.scytalys.eshop.service.impl;
 
 import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.dto.CustomerInfoResponse;
+import com.scytalys.eshop.dto.ResponseApi;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
@@ -11,6 +12,7 @@ import com.scytalys.eshop.repository.CartProductRepository;
 import com.scytalys.eshop.repository.CustomerRepository;
 import com.scytalys.eshop.repository.ProductRepository;
 import com.scytalys.eshop.service.CartService;
+import com.scytalys.eshop.service.CustomerValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ public class CartServiceImpl implements CartService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final CartProductRepository cartproductRepository;
+    private final CustomerValidator customerValidator;
 
     @Override
     public Customer getCustomer(long id) {
@@ -46,8 +49,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public ResponseApi<Customer> createCustomer(Customer customer) {
+        ResponseApi<Customer> validation = customerValidator.validate(customer);
+        if (validation.getCode() != 0) return validation;
+        customerRepository.save(customer);
+        return new ResponseApi<Customer>(0,"the customer was saved", customer);
     }
 
     ////////////////////////////////////////////////////////////////

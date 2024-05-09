@@ -2,6 +2,7 @@ package com.scytalys.eshop.service;
 
 import com.scytalys.eshop.dto.CartProductDto;
 import com.scytalys.eshop.dto.CustomerInfoResponse;
+import com.scytalys.eshop.dto.ResponseApi;
 import com.scytalys.eshop.model.Cart;
 import com.scytalys.eshop.model.CartProduct;
 import com.scytalys.eshop.model.Customer;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface CartService {
     // customer management
 
-    Customer createCustomer(Customer customer);
+    ResponseApi<Customer> createCustomer(Customer customer);
     Customer getCustomer(long id);
     List<Customer> getCustomers();
     Customer updateCustomer(long id, Customer customer);
