@@ -1,14 +1,12 @@
 package com.scytalys.eshop.controller;
 
 import com.scytalys.eshop.dto.IncreaseDto;
-import com.scytalys.eshop.dto.ProductUpdateRequest;
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.ProductSpecifications;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

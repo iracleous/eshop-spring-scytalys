@@ -1,7 +1,5 @@
 package com.scytalys.eshop.service.impl;
 
-import com.fasterxml.jackson.databind.util.ArrayBuilders;
-import com.scytalys.eshop.dto.ProductUpdateRequest;
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.ProductRepository;
 import com.scytalys.eshop.service.ProductService;
@@ -9,11 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
 
 @Service
 @AllArgsConstructor
