@@ -47,7 +47,6 @@ public class SampleData {
         customer.setEmail("dim@mail.fr");
         cartService.createCustomer(customer);
 
-
         Cart cart = cartService.createCart(customer.getId());
         int quantity = 2;
         cartService.addProduct(new CartProductDto(cart.getId(),product2.getId(), product2.getPrice(), quantity));

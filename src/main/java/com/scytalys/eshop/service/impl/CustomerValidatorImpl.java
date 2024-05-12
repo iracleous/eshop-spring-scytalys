@@ -21,6 +21,10 @@ public class CustomerValidatorImpl implements CustomerValidator {
         {
             return new ResponseApi<>(103,"incorrect format for  customer zip provided", null);
         }
+        if (customer.getEmail()!=null && ! customer.getEmail().matches("^(.+)@(\\S+)$"))
+        {
+            return new ResponseApi<>(104,"incorrect format for customer email provided", null);
+        }
          return new ResponseApi<>(0,"validation passed", customer);
     }
 }

@@ -70,7 +70,6 @@ public class EmployeeServiceImpl implements EmployeeService {
          } catch (Exception e) {
              throw new EmployeeCannotCreateException(e.getMessage());
          }
-
     }
 
     /**
