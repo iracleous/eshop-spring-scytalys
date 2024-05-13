@@ -1,12 +1,17 @@
 package com.scytalys.eshop.service.impl;
 
+import com.scytalys.eshop.dto.ProductSearchDto;
+import com.scytalys.eshop.dto.ProductUpdateRequest;
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.ProductRepository;
+import com.scytalys.eshop.repository.ProductSpecifications;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -32,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Product updateProduct(long id, Product productRequest) {
+    public Product updateProduct(long id, ProductUpdateRequest productRequest) {
         Product productDb = productRepository.findById(id).orElse(null);
         if (productDb == null) { return null;}
         // Apply updates
@@ -43,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
             productDb.setDescription(productRequest.getDescription());
         }
         if (productRequest.getPrice() != null) {
-            productDb.setPrice(productRequest.getPrice());
+            productDb.setPrice(new BigDecimal(productRequest.getPrice())  );
         }
         productRepository.save(productDb);
         return productDb;
@@ -75,5 +80,27 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> search(Specification<Product> spec) {
         return productRepository.findAll(spec);
+    }
+
+    /**
+     * @param productSearchDto
+     * @return
+     */
+    @Override
+    public List<Product> search(ProductSearchDto productSearchDto) {
+        Specification<Product> spec = Specification.where(null);
+        if (productSearchDto.name() != null) {
+            spec = spec.and(ProductSpecifications.nameContains(productSearchDto.name()));
+        }
+        if (productSearchDto.description() != null) {
+            spec = spec.and(ProductSpecifications.descriptionContains(productSearchDto.description()));
+        }
+        if (productSearchDto.minPrice() != null) {
+            spec = spec.and(ProductSpecifications.minPriceCalculation(productSearchDto.minPrice()));
+        }
+        if (productSearchDto.maxPrice() != null) {
+            spec = spec.and(ProductSpecifications.maxPriceCalculation(productSearchDto.maxPrice()));
+        }
+        return search(spec);
     }
 }

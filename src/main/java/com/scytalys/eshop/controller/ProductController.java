@@ -1,6 +1,8 @@
 package com.scytalys.eshop.controller;
 
 import com.scytalys.eshop.dto.IncreaseDto;
+import com.scytalys.eshop.dto.ProductSearchDto;
+import com.scytalys.eshop.dto.ProductUpdateRequest;
 import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.ProductSpecifications;
 import com.scytalys.eshop.service.ProductService;
@@ -37,7 +39,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public Product update(@PathVariable long productId,@RequestBody Product product){
+    public Product update(@PathVariable long productId,@RequestBody ProductUpdateRequest product){
         return productService.updateProduct(productId, product);
     }
 
@@ -54,14 +56,12 @@ public class ProductController {
     @GetMapping("/search")
     public List<Product> searchProducts(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String description) {
-        Specification<Product> spec = Specification.where(null);
-        if (name != null) {
-            spec = spec.and(ProductSpecifications.nameContains(name));
-        }
-        if (description != null) {
-            spec = spec.and(ProductSpecifications.descriptionContains(description));
-        }
-        return productService.search(spec);
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice
+            ) {
+
+        return productService.search(
+                new ProductSearchDto (name, description, minPrice, maxPrice));
     }
 }
