@@ -35,6 +35,8 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((ant) -> ant
                         .requestMatchers(
+                                "/actuator/**",
+                                "/swagger-ui/**",
          /**/                   "/api/**",
                                 "/auth/signup",
                                 "/auth/login").permitAll()

@@ -8,6 +8,7 @@ import com.scytalys.eshop.repository.ProductSpecifications;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "myProducts", allEntries = true)
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
@@ -45,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "myProducts", allEntries = true)
     public Product updateProduct(long id, ProductUpdateRequest productRequest) {
         Product productDb = productRepository.findById(id).orElse(null);
         if (productDb == null) { return null;}
@@ -65,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "myProducts", allEntries = true)
     public boolean deleteProduct(long id) {
         Product productDb = productRepository.findById(id).orElse(null);
         if (productDb == null) { return false;}
@@ -74,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "myProducts", allEntries = true)
     public boolean increasePrices(double increasePercentage) {
         if (increasePercentage <= 0 ||increasePercentage>.40) { return false; }
         productRepository.increasePrice(1+increasePercentage);
