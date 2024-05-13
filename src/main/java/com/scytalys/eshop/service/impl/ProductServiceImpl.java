@@ -7,6 +7,8 @@ import com.scytalys.eshop.repository.ProductRepository;
 import com.scytalys.eshop.repository.ProductSpecifications;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +19,10 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+
     @Override
     @Transactional
     public Product createProduct(Product product) {
@@ -30,10 +34,14 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
+
     @Override
+    @Cacheable("myProducts")
     public List<Product> getProducts() {
-        return productRepository.findAll();
+       return productRepository.findAll();
     }
+
+
 
     @Override
     @Transactional

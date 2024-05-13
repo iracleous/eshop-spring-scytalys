@@ -7,6 +7,7 @@ import com.scytalys.eshop.model.Product;
 import com.scytalys.eshop.repository.ProductSpecifications;
 import com.scytalys.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor(onConstructor_ = {@Autowired})
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/product")
+@Slf4j
 public class ProductController {
 
     private final ProductService productService;
@@ -33,9 +35,16 @@ public class ProductController {
         return product == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(product);
     }
 
+
     @GetMapping("")
     public List<Product> read(){
-        return productService.getProducts();
+
+        long start = System.currentTimeMillis();
+        List<Product> products = productService.getProducts();
+        long end = System.currentTimeMillis();
+        log.info("Time taken: " + (end - start));
+
+        return products;
     }
 
     @PutMapping("/{productId}")
