@@ -65,4 +65,31 @@ More topics
 - more than one database
 - tracking the changes of the database, flyway
 - maven profiles
-- 
+
+
+#########################3
+Usage
+
+###
+POST http://localhost:5001/auth/signup
+Content-Type: application/json
+
+{
+"name": "Dimitris",
+"password": "passw0rd",
+"roles": "USER"
+}
+
+
+###
+POST http://localhost:5001/auth/login
+Content-Type: application/json
+
+{
+"username": "Dimitris",
+"password": "passw0rd"
+}
+
+###
+GET http://localhost:5001/appi/hello
+Authorization: Bearer eyfffffffffffffffffffffffffffffffffffffffffffffffff

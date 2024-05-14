@@ -40,7 +40,7 @@ public class SecurityConfig {
          /**/                   "/api/**",
                                 "/auth/signup",
                                 "/auth/login").permitAll()
-                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/api/**", "/appi/**").authenticated()
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
